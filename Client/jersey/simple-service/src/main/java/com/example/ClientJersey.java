@@ -8,9 +8,9 @@ import jakarta.ws.rs.sse.SseEventSource;
 public class ClientJersey {
   public static void main(String[] args) {
     Client client = ClientBuilder.newBuilder().build();
-    WebTarget target = client.target("http://localhost:8080/event");
+    WebTarget target = client.target("http://localhost:8080/test");
     SseEventSource sseEventSource = SseEventSource.target(target).build();
-    sseEventSource.register(event -> System.out.println(event.getName() + "; " + event.readData(String.class)));
+    sseEventSource.register(event -> System.out.println(event));
     sseEventSource.open();
     //通信を切断できる
     sseEventSource.close();

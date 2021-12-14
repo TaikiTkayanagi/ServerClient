@@ -1,0 +1,2 @@
+//コマンドプロンプトで下記を実行
+curl --request POST --header "Content-Type: application/json" --data {"\"name\":\"taiki\",\"age\":\"20\"}" "http://localhost:8080/"

@@ -7,7 +7,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import spring.rest.demo.Data.Information;
+import spring.rest.demo.Information;
+
 
 @RestController
 public class JsonCatchController {
@@ -18,7 +19,6 @@ public class JsonCatchController {
     @ResponseBody
     public Information getJson(@RequestBody Information information, Model model){
         logger.info("Json is {}", information.toString());
-
         return information;
     }
 }

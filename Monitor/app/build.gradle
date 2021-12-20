@@ -44,6 +44,25 @@ task copyConfigDev(type:Copy){
     into 'build/resources/Config'
 }
 
+//sourceSets.main.output.resourcesDir:Default 	build/resources/main:
+//これで、-Penviroment=envでconfigフォルダーを除外できる
+sourceSets {
+    main{
+        output.resourcesDir = "build/resources/"
+        resources{
+            //Configを除外する
+            if(enviroment == 'env'){
+                exclude 'Config'
+            } else {
+                exclude 'META-INF'
+            }
+        }
+    }
+}
+
+print sourceSets.main.resources
+
+//MANIFESTFILEの設定を行う
 jar {
     manifest {
         attributes(

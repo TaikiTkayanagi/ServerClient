@@ -1,0 +1,26 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "gradle",
+			"id": "c:\\Users\\81803\\Documents\\test\\ServerClient\\Monitorapp:runapp",
+			"script": "app:run",
+			"description": "Runs this project as a JVM application",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"project": "app",
+			"buildFile": "C:\\Users\\81803\\Documents\\test\\ServerClient\\Monitor\\app\\build.gradle",
+			"rootProject": "Monitor",
+			"projectFolder": "c:\\Users\\81803\\Documents\\test\\ServerClient\\Monitor",
+			"workspaceFolder": "c:\\Users\\81803\\Documents\\test\\ServerClient\\Monitor",
+			"args": "",
+			"javaDebug": false,
+			"problemMatcher": [
+				"$gradle"
+			],
+			"label": "gradle: app:run"
+		}
+	]
+}

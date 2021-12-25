@@ -3,21 +3,30 @@
  */
 package Monitor;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+
 
 public class App {
-    private static final Logger LOGGER = LogManager.getLogger();
 
-    public String getGreeting() {
-        return "Hello World!";
-    }
+    public static Logger loggerTest1 = LoggerFactory.getLogger("Monitor.test1");
+    public static Logger loggerTest2 = LoggerFactory.getLogger("Monitor.test2");
 
     public static void main(String[] args) {
+        loggerTest1.info("test1");
+        loggerTest2.info("test2");
+
         SampleThread1 thread1 = new SampleThread1();
-        LOGGER.info("logテスト");
-        LOGGER.error("logテスト");
         Runtime.getRuntime().addShutdownHook(new ShutdownThread(thread1));
+
+        Path p1 = Paths.get("");
+        Path p2 = p1.toAbsolutePath();
+        //System.out.println(App.class.getResource("/Config").getPath());
+        System.out.println(java.lang.management.ManagementFactory.getRuntimeMXBean().getName().split("@")[0]);
 
         thread1.start();
     }

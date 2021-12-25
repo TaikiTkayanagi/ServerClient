@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE logback>
+<configuration>
+	<!-- 1. ログ出力のスタイルを定義 -->
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS}[%thread][%-5level][%logger] %msg%n</pattern>
+		</encoder>
+	</appender>
+	<appender name="FILE"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>logs/File.log</file>
+		<append>true</append>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>logs/File.%d{yyyyMMdd}.log</fileNamePattern>
+			<maxHistory>5</maxHistory>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS}[%thread][%-5level][%logger] %msg%n</pattern>
+		</encoder>
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>INFO</level>
+		</filter>
+	</appender>
+	<appender name="LOGIN"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>logs/test1.log</file>
+		<append>true</append>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>logs/Login.%d{yyyyMMdd}.log</fileNamePattern>
+			<maxHistory>100</maxHistory>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%msg%n</pattern>
+		</encoder>
+	</appender>
+	<appender name="HISTORY"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>logs/test2.log</file>
+		<append>true</append>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>logs/History.%d{yyyyMMdd}.log</fileNamePattern>
+			<maxHistory>100</maxHistory>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<!-- 2. アプリ側での参照名を定義 -->
+	<logger name="Monitor.test1"
+		additivity="false">
+		<level value="INFO" />
+		<appender-ref ref="LOGIN" />
+	</logger>
+	<logger name="Monitor.test2"
+		additivity="false">
+		<level value="INFO" />
+		<appender-ref ref="HISTORY" />
+	</logger>
+
+        <!-- 3. 標準ログ出力 -->
+	<root level="INFO">
+		<!-- コンソールログ -->
+		<appender-ref ref="STDOUT" />
+		<!-- ファイルログ -->
+		<appender-ref ref="FILE" />
+	</root>
+</configuration>

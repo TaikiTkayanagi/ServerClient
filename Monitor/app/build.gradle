@@ -25,8 +25,14 @@ dependencies {
     implementation 'com.google.guava:guava:30.1.1-jre'
 
     //log4j2.16なら脆弱性が大丈夫かつ、サポートない
-    implementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.16.0'
+    /*implementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.16.0'
     implementation group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.16.0'
+    */
+
+    implementation 'ch.qos.logback:logback-core:1.2.10'
+    // https://mvnrepository.com/artifact/ch.qos.logback/logback-classic
+    implementation 'ch.qos.logback:logback-classic:1.2.10'
+
 }
 
 application {
@@ -46,16 +52,25 @@ task copyConfigDev(type:Copy){
 
 //sourceSets.main.output.resourcesDir:Default 	build/resources/main:
 //これで、-Penviroment=envでconfigフォルダーを除外できる
+def enviroment = project.hasProperty('env') ? env : 'dev'
+copy {
+    def path = "src/main/resources/Config/dev"
+    if(enviroment == 'rel'){
+        path = "src/main/resources/Config/release"
+    }
+
+    from path
+    into 'src/main/resources'
+
+    rename { String files ->
+        files.replace("dev", "configApp")
+    }
+}
+
 sourceSets {
     main{
-        output.resourcesDir = "build/resources/"
         resources{
-            //Configを除外する
-            if(enviroment == 'env'){
-                exclude 'Config'
-            } else {
-                exclude 'META-INF'
-            }
+            exclude "Config"
         }
     }
 }

@@ -13,12 +13,16 @@ import org.slf4j.LoggerFactory;
 
 public class App {
 
-    public static Logger loggerTest1 = LoggerFactory.getLogger("Monitor.test1");
-    public static Logger loggerTest2 = LoggerFactory.getLogger("Monitor.test2");
+    private static Logger loggerTest1 = LoggerFactory.getLogger("Monitor.test1");
+    private static Logger loggerTest2 = LoggerFactory.getLogger("Monitor.test2");
+    private static Logger loggerTest3 = LoggerFactory.getLogger("Monitor.test2.sun");
+    private static Logger loggerTest4 = LoggerFactory.getLogger("Monitor.test1.sun");
 
     public static void main(String[] args) {
         loggerTest1.info("test1");
         loggerTest2.info("test2");
+        loggerTest3.info("test3");
+        loggerTest4.info("test4");
 
         SampleThread1 thread1 = new SampleThread1();
         Runtime.getRuntime().addShutdownHook(new ShutdownThread(thread1));

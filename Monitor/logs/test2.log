@@ -1,1 +1,5 @@
-test2
+2022-01-06 22:46:44.288[main][INFO ][Monitor.test2] test2
+2022-01-06 22:48:48.264[main][INFO ][Monitor.test2] test2
+2022-01-06 22:48:48.828[main][INFO ][Monitor.test2.sun] test3
+2022-01-06 22:49:58.260[main][INFO ][Monitor.test2] test2
+2022-01-06 22:49:58.698[main][INFO ][Monitor.test2.sun] test3

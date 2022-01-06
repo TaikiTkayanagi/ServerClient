@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE logback>
 <configuration>
-	<!-- 1. ログ出力のスタイルを定義 -->
 	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
 		<encoder>
 			<pattern>%d{HH:mm:ss.SSS}[%thread][%-5level][%logger] %msg%n</pattern>
@@ -22,7 +21,8 @@
 			<level>INFO</level>
 		</filter>
 	</appender>
-	<appender name="LOGIN"
+    <!--test1用のファイル出力の設定-->
+	<appender name="test1"
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<file>logs/test1.log</file>
 		<append>true</append>
@@ -31,32 +31,38 @@
 			<maxHistory>100</maxHistory>
 		</rollingPolicy>
 		<encoder>
-			<pattern>%msg%n</pattern>
+            <charset>UTF-8</charset>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS}[%thread][%-5level][%logger] %msg%n</pattern>
 		</encoder>
 	</appender>
-	<appender name="HISTORY"
+	<appender name="test2"
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--出力するパス-->
 		<file>logs/test2.log</file>
 		<append>true</append>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
 			<fileNamePattern>logs/History.%d{yyyyMMdd}.log</fileNamePattern>
 			<maxHistory>100</maxHistory>
 		</rollingPolicy>
+        <!--ログの出力パターン-->
 		<encoder>
-			<pattern>%msg%n</pattern>
+            <charset>UTF-8</charset>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS}[%thread][%-5level][%logger] %msg%n</pattern>
 		</encoder>
 	</appender>
 
-	<!-- 2. アプリ側での参照名を定義 -->
+    <!--additivityが伝播をなしにする-->
 	<logger name="Monitor.test1"
 		additivity="false">
 		<level value="INFO" />
-		<appender-ref ref="LOGIN" />
+        <!--appenderの参照名を記入-->
+		<appender-ref ref="test1" />
 	</logger>
 	<logger name="Monitor.test2"
 		additivity="false">
 		<level value="INFO" />
-		<appender-ref ref="HISTORY" />
+        <!--appenderの参照名を記入-->
+		<appender-ref ref="test2" />
 	</logger>
 
         <!-- 3. 標準ログ出力 -->
